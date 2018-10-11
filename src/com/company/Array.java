@@ -140,4 +140,13 @@ public class Array<E> {
         res.append("]");
         return res.toString();
     }
+
+    // 将数组空间的容量变成newCapacity大小
+    public void resize(int newcapacity){
+        E[] newdata = (E[])new Object[newcapacity];
+        for (int i=0;i<size;i++)
+            newdata[i] = data[i];
+        data = newdata;
+
+    }
 }
