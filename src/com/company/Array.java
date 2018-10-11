@@ -50,11 +50,12 @@ public class Array<E> {
 
     //在INDEX个位置插入元素e
     public void add(int index , E e){
-        if(size == data.length)
-            throw new IllegalArgumentException("Add failed , array is full");
 
         if (index < 0  || index > size)
             throw new IllegalArgumentException("Add failed .required index >=0 adn index <=size");
+
+        if(size == data.length)
+            resize(2 * data.length);
 
         for (int i = size - 1; i >= index ; i-- )
             data[i+1] = data[i];
@@ -106,6 +107,9 @@ public class Array<E> {
             data[i -1] = data[i];
             size--;
         }
+
+        if (size == data.length / 4 && data.length /2 !=0 )
+            resize(data.length/2);
         return ret;
     }
 
@@ -130,7 +134,7 @@ public class Array<E> {
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
-        res.append(String.format("Array:size = %d Capacity=%d/n",size,getCapacity()));
+        res.append(String.format("Array:size = %d Capacity=%d\n",size,getCapacity()));
         res.append("[");
         for (int i=0 ; i<size ; i++) {
             res.append(data[i]);
