@@ -25,12 +25,12 @@ public class LinkedList<E> {
             return e.toString();
         }
     }
-    private Node head;
+    private Node dummyHead;
     private int size;
 
     public LinkedList(){
 
-        head = new Node();
+        dummyHead = new Node();
         size = 0;
 
     }
@@ -49,8 +49,7 @@ public class LinkedList<E> {
 //        node.next = head;
 //        head = node;
 
-        head = new Node(e, head);
-        size ++;
+        add(0,e);
     }
 
     // add element in linkedlist
@@ -62,11 +61,12 @@ public class LinkedList<E> {
         if(index == 0)
             addFirst(e);
         else {
-            for (int i = 0; i < index - 1; i++)
-                head = head.next;
+            Node prev = dummyHead;
+            for (int i = 0; i < index ; i++)
+                prev = prev.next;
 
 
-            head.next = new Node(e,head);
+            prev.next = new Node(e,prev.next);
             size ++;
         }
 
