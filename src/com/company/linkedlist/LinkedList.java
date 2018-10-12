@@ -55,12 +55,9 @@ public class LinkedList<E> {
     // add element in linkedlist
     public void add(int index , E e){
 
-        if (index > size || index <0)
-            throw new IllegalArgumentException("add failed");
+        if(index < 0 || index > size)
+            throw new IllegalArgumentException("Add failed. Illegal index.");
 
-        if(index == 0)
-            addFirst(e);
-        else {
             Node prev = dummyHead;
             for (int i = 0; i < index ; i++)
                 prev = prev.next;
@@ -68,7 +65,7 @@ public class LinkedList<E> {
 
             prev.next = new Node(e,prev.next);
             size ++;
-        }
+
 
 
     }
@@ -76,6 +73,66 @@ public class LinkedList<E> {
     // 在链表末尾添加新的元素e
     public void addLast(E e){
         add(size, e);
+    }
+
+    // 获得链表的第index(0-based)个位置的元素
+    public E get(int index){
+        if (index > size - 1 || index < 0)
+            throw new IllegalArgumentException("query fails");
+        Node cur = dummyHead.next;
+        for(int i = 0 ; i < index ; i ++)
+            cur = cur.next;
+        return cur.e;
+    }
+
+    // 获得链表的第一个元素
+    public E getFirst(){
+        return get(0);
+    }
+
+    // 获得链表的最后一个元素
+    public E getLast(){
+        return get(size - 1);
+    }
+
+    // 修改链表的第index(0-based)个位置的元素为e
+    public void set(int index, E e){
+        if (index < 0 || index > size -1)
+            throw new IllegalArgumentException("update fail");
+
+        Node cur = dummyHead.next;
+        for (int i = 0 ; i < index ; i++)
+            cur = cur.next;
+
+        cur.e = e;
+
+    }
+
+    // 查找链表中是否有元素e
+    public boolean contains(E e){
+        Node cur = dummyHead.next;
+        while(cur != null){
+            if(cur.e.equals(e))
+                return true;
+            cur = cur.next;
+        }
+        return false;
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder res = new StringBuilder();
+
+//        Node cur = dummyHead.next;
+//        while(cur != null){
+//            res.append(cur + "->");
+//            cur = cur.next;
+//        }
+        for(Node cur = dummyHead.next ; cur != null ; cur = cur.next)
+            res.append(cur + "->");
+        res.append("NULL");
+
+        return res.toString();
     }
 
 }
