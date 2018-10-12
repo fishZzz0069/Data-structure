@@ -25,4 +25,57 @@ public class LinkedList<E> {
             return e.toString();
         }
     }
+    private Node head;
+    private int size;
+
+    public LinkedList(){
+
+        head = new Node();
+        size = 0;
+
+    }
+
+    public int getSize(){
+        return size;
+    }
+
+    public boolean isEmpty(){
+        return size == 0;
+    }
+
+    // 在链表头添加新的元素e
+    public void addFirst(E e){
+//        Node node = new Node(e);
+//        node.next = head;
+//        head = node;
+
+        head = new Node(e, head);
+        size ++;
+    }
+
+    // add element in linkedlist
+    public void add(int index , E e){
+
+        if (index > size || index <0)
+            throw new IllegalArgumentException("add failed");
+
+        if(index == 0)
+            addFirst(e);
+        else {
+            for (int i = 0; i < index - 1; i++)
+                head = head.next;
+
+
+            head.next = new Node(e,head);
+            size ++;
+        }
+
+
+    }
+
+    // 在链表末尾添加新的元素e
+    public void addLast(E e){
+        add(size, e);
+    }
+
 }
