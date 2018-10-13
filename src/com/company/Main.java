@@ -1,28 +1,47 @@
 package com.company;
 
+import com.company.linkedlist.LinkedList;
+
+import java.util.Random;
+
 public class Main {
 
+
+    // 测试使用q运行opCount个enqueueu和dequeue操作所需要的时间，单位：秒
+    private static double testQueue(Queue<Integer> q, int opCount){
+
+        long startTime = System.nanoTime();
+
+        Random random = new Random();
+        for(int i = 0 ; i < opCount ; i ++)
+            q.enqueue(random.nextInt(Integer.MAX_VALUE));
+        for(int i = 0 ; i < opCount ; i ++)
+            q.dequeue();
+
+        long endTime = System.nanoTime();
+
+        return (endTime - startTime) / 1000000000.0;
+    }
+
     public static void main(String[] args) {
-        Array arr = new Array(20);
-        for(int i = 0 ; i < 10 ; i ++)
-            arr.addLast(i);
-        System.out.println(arr);
+        LinkedList<Integer> linkedList = new LinkedList<>();
+        for(int i = 0 ; i < 5 ; i ++){
+            linkedList.addFirst(i);
+            System.out.println(linkedList);
+        }
 
-        arr.add(1, 100);
-        System.out.println(arr);
 
-        arr.addFirst(-1);
-        System.out.println(arr);
-        // [-1, 0, 100, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        linkedList.add(2, 666);
+        System.out.println(linkedList);
 
-        arr.remove(2);
-        System.out.println(arr);
+        linkedList.remove(2);
+        System.out.println(linkedList);
 
-        arr.removeElement(4);
-        System.out.println(arr);
+        linkedList.removeFirst();
+        System.out.println(linkedList);
 
-        arr.removeFirst();
-        System.out.println(arr);
+        linkedList.removeLast();
+        System.out.println(linkedList);
 
 
 
