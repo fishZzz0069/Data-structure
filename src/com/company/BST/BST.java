@@ -1,5 +1,6 @@
 package com.company.BST;
 
+import java.util.Stack;
 import com.company.linkedlist.LinkedListQueue;
 
 public class BST<E extends Comparable<E>> {
@@ -98,6 +99,32 @@ public class BST<E extends Comparable<E>> {
             return contains(node.left, e);
         else
             return contains(node.right,e);
+
+    }
+
+    // 二分搜索树的非递归前序遍历
+    private void preOrderNR(){
+        if (root == null)
+            return;
+
+
+        Stack<Node> stack = new Stack<>();
+
+
+        stack.push(root);
+        while (!stack.isEmpty()){
+            Node cur = stack.pop();
+            System.out.println(cur.e);
+
+            if(cur.right != null)
+                stack.push(cur.right);
+            if(cur.left != null)
+                stack.push(cur.left);
+
+        }
+
+
+
 
     }
 
