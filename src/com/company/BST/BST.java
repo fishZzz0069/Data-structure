@@ -2,6 +2,8 @@ package com.company.BST;
 
 import java.util.Stack;
 import com.company.linkedlist.LinkedListQueue;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class BST<E extends Comparable<E>> {
 
@@ -126,6 +128,25 @@ public class BST<E extends Comparable<E>> {
 
 
 
+    }
+
+    // 二分搜索树的层序遍历
+    public void levelOrder(){
+
+        if(root == null)
+            return;
+
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()){
+            Node cur = q.remove();
+            System.out.println(cur.e);
+
+            if(cur.left != null)
+                q.add(cur.left);
+            if(cur.right != null)
+                q.add(cur.right);
+        }
     }
 
     public void preOrder(){
